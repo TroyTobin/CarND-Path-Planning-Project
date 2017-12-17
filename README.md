@@ -7,10 +7,40 @@ These waypoints are constrained to the location of a 3 lane highway where the ve
 
 The basic approach taken is as follows.
 
+#### Navigation
 1. Determine any obstactles in front of our car (OC).
-   These obstactles are in the form of other vehilces, which we know important detail such as frenet locations and speed.
-   
+   These obstactles are in the form of other vehicles, which we know important detail such as frenet locations and speed.
+   * Determine if any vehicles are immediately in front of OC.
+      * Determined by a limited search window
+      * Using frenet s values
+   * Determine if vehicles are in the same lane
+      * Using frenet d values
+      * Matching to the current lane of the OC (with lower and upper limits representing the lane edges)
+2. If there are obstacles in front, then the OC speed is reduced
+3. If there are no obstacles in front, then the OC speed is increased to a limit
+   * The limit here is set to the MAX SPEED, minus a buffer
+   * This ensures the speed limit is never breached.
+4. If there is an obstacle in front, then a lane change is also attempted.
+   * The lane change is signaled to the internal state machine
+   * Both the left and right lane are checked for obstacles
+      * In front (as done for the OC's current lane)
+      * Behind in each lane, simply determine if there is a vehicle within a certain distance (using frenent s values)
+   * If safe (no obstactles in front or behind), then a lane change is initiated by selecting either left or right.
+      * If both left and right lanes are clear, the left is preferences. 
 
+#### Waypoint creation
+Waypoints are created by creating a spline of nominal movement along a lane.  This is accomplished using the frenet 's' coordinates to project the OC forward.
+
+1. Generate projected frenet 's' coordinates along the lane
+2. Convert frenet coordinates to cartesian (x,y)
+3. Imporant step is convert the cartesian coordinates to the vehicles reference point (using the yaw of the vehicle)
+4. Add points to the spline for nominal movement
+5. Using the spline create the waypoints at set intervals
+  * The intervals set the vehicle speed
+  * The further the distance the faster the vehicle travels
+  * Based on an 0.2s update step
+6. Convert the waypoints back to the global coordinate system (from the cars reference)
+7. submit waypoints to the simulator for actioning.
 
    
 ### Simulator.
