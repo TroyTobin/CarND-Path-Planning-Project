@@ -1,5 +1,17 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
+
+### Project notes
+The goal of this project was to create a path planner in the form of a set of waypoints.
+These waypoints are constrained to the location of a 3 lane highway where the vehicle may speed up, slow down, cruise at speed, or change lanes.
+
+The basic approach taken is as follows.
+
+1. Determine any obstactles in front of our car (OC).
+   These obstactles are in the form of other vehilces, which we know important detail such as frenet locations and speed.
+   
+
+
    
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases).
