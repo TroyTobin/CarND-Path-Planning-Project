@@ -42,6 +42,15 @@ Waypoints are created by creating a spline of nominal movement along a lane.  Th
 6. Convert the waypoints back to the global coordinate system (from the cars reference)
 7. submit waypoints to the simulator for actioning.
 
+#### Results
+The result of the above implementation is that the vehicle is able to navigate the track without incident.
+It does this by adjusting it's speed and also by changing lanes (when safe)
+
+Travel 4.5 miles without incident
+![Alt](/Screen%20Shot%202017-12-18%20at%202.07.46%20am.png "Pass1")
+
+Lane change in progress
+![Alt](Screen%20Shot%202017-12-18%20at%202.08.13%20am.png "Pass2")
    
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases).
